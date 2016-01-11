@@ -8,8 +8,6 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.conf import settings
 
-from .tools import get_access_token
-
 # create client object with app credentials
 client = soundcloud.Client(
     client_id=settings.SOCIAL_AUTH_SOUNDCLOUD_KEY,

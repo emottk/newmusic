@@ -16,10 +16,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 
-from main.views import Index
-
 urlpatterns = patterns('',
-    url(r'^main/', include('main.urls')),
+    url('', include('main.urls')),
     url('^', include('django.contrib.auth.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^users/', include('users.urls')),
