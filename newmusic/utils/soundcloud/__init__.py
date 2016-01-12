@@ -4,9 +4,10 @@ from django.conf import settings
 
 
 # create client object with app credentials
-client = soundcloud.Client(client_id=settings.SOCIAL_AUTH_SOUNDCLOUD_KEY,
-                           client_secret=settings.SOCIAL_AUTH_SOUNCLOUD_SECRET,
-                           redirect_uri='http://localhost:8000/users/register-by-token/soundcloud')
+client = soundcloud.Client(
+    client_id=settings.SOCIAL_AUTH_SOUNDCLOUD_KEY,
+    client_secret=settings.SOCIAL_AUTH_SOUNCLOUD_SECRET,
+    redirect_uri='http://localhost:8000/users/register-by-token/soundcloud')
 
 
 def get_artists():
@@ -14,7 +15,7 @@ def get_artists():
     artists = client.get('/users', limit=page_size)
     artists_list = []
     for resource in artists:
-        if resource.followers_count >=20 and resource.followers_count <= 2000:
+        if resource.followers_count >= 20 and resource.followers_count <= 2000:
             artists_list.append({
                 "permalink": resource.permalink,
                 "permalink_url": resource.permalink_url,
