@@ -14,11 +14,12 @@ def get_artists():
     artists = client.get('/users', limit=page_size)
     artists_list = []
     for resource in artists:
-        artists_list.append({
-            "permalink": resource.permalink,
-            "permalink_url": resource.permalink_url,
-            "followers_count": resource.followers_count,
-            "avatar_url": resource.avatar_url,
-        })
+        if resource.followers_count >=20 and resource.followers_count <= 2000:
+            artists_list.append({
+                "permalink": resource.permalink,
+                "permalink_url": resource.permalink_url,
+                "followers_count": resource.followers_count,
+                "avatar_url": resource.avatar_url,
+            })
     artists_list = sorted(artists_list, key=lambda artist: artist["followers_count"])
     return artists_list
