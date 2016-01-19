@@ -22,6 +22,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = '/users/check/'
 
 # Application definition
 
@@ -96,7 +97,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.user_details',
 )
 
-AUTH_USER_MODEL = SOCIAL_AUTH_USER_MODEL = 'users.User'
 
 ROOT_URLCONF = 'newmusic.urls'
 
@@ -113,6 +113,7 @@ TEMPLATES = [
                 'social.apps.django_app.context_processors.login_redirect',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.csrf',
             ],
         },
     },
