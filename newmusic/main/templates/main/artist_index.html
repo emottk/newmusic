@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+{% load staticfiles %}
+<link rel="stylesheet" type="text/javascript" href="{% static 'main/widget.js' %}" />
+
+<div style="padding:20px">
+<head>
+<h1>Artists</h1>
+
+
+</head>
+
+<body>
+  <iframe src="https://w.soundcloud.com/player/?url={{ song_url }}&auto_play=false"></iframe>
+{% if rand %}
+  <ul>
+      <li><a href="{{ rand.permalink_url }}">{{ rand.permalink }}</a>
+        <br><a href="{{ rand.permalink_url }}"><img src= "{{ rand.avatar_url }}"></a></li>
+  </ul>
+{% else %}
+    <p>No Artists Available</p>
+{% endif %}
+
+
+
+<form method='POST' action=''>{% csrf_token %}
+<input type='hidden' value='1' name='opinion' />
+<input type='submit' value='Like' />
+</form>
+
+<form method='POST' action=''>{% csrf_token %}
+<input type='hidden' value='0' name='opinion' />
+<input type='submit' value='Dislike' />
+</form>
+
+</div>
+
+</body>
+</html>
