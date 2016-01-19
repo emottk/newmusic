@@ -2,7 +2,7 @@ import random
 import soundcloud
 
 from django.conf import settings
-
+from newmusic.main.models import Artist, Song
 
 # create client object with app credentials
 client = soundcloud.Client(
@@ -40,13 +40,15 @@ def get_artists():
     artists_list = sorted(artists_list, key=lambda artist: artist["followers_count"])
     return artists_list
 
-def rand_artist(artists_list):
-    return random.choice(artists_list)
+def rand(list):
+    return random.choice(list)
 
 def get_rand_track_for_artist(artist):
-    response = client.get('users/{}/tracks'.format(artist['id']))
+    response = client.get('users/{}/tracks'.format(artist.sc_id))
     track = random.choice(response)
-    return track.obj['permalink_url']
+    permalink = track.obj['permalink']
+    permalink_url = track.obj['permalink_url']
+    return (permalink, permalink_url)
 
         # songs_list.append{}
     # page_size = 100

@@ -13,11 +13,11 @@
 
 <body>
   <iframe src="https://w.soundcloud.com/player/?url={{ song_url }}&auto_play=false"></iframe>
-{% if rand %}
-  <ul>
-      <li><a href="{{ rand.permalink_url }}">{{ rand.permalink }}</a>
-        <br><a href="{{ rand.permalink_url }}"><img src= "{{ rand.avatar_url }}"></a></li>
-  </ul>
+{% if artist %}
+      <br>
+      <a href="{{ artist.url }}">{{ artist.name }}</a>
+      <br>
+      <a href="{{ artist.url }}"><img src= "{{ artist.avatar_url }}"></a>
 {% else %}
     <p>No Artists Available</p>
 {% endif %}

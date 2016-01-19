@@ -6,13 +6,13 @@ from django.conf import settings
 class Artist(models.Model):
     name = models.CharField(max_length=100)
     sc_id = models.IntegerField()
+    url = models.CharField(max_length=100)
+    avatar_url = models.CharField(max_length=100)
 
-    # @classmethod
-    # def create(cls, name):
-    #     artist = cls(name=name)
 
 class Song(models.Model):
     name = models.CharField(max_length=100)
+    url = models.CharField(max_length=100)
     artist = models.ForeignKey('main.Artist', on_delete=models.CASCADE)
 
 

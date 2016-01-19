@@ -12,7 +12,12 @@ class Command(BaseCommand):
                 if Artist.objects.filter(name=artist['permalink']).exists():
                     pass
                 else:
-                    a = Artist(name=artist['permalink'])
+                    a = Artist(
+                        name=artist['permalink'],
+                        sc_id=artist['id'],
+                        url=artist['permalink_url'],
+                        avatar_url=artist['avatar_url']
+                        )
                     a.save()
             except Artist.DoesNotExist:
                 raise CommandError('Artist does not exist')

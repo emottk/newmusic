@@ -5,9 +5,9 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 
-from newmusic.utils.soundcloud import get_artists, rand_artist, get_rand_track_for_artist
+from newmusic.utils.soundcloud import get_artists, rand, get_rand_track_for_artist
 from newmusic.main.forms import OpinionForm
-from newmusic.main.models import Artist
+from newmusic.main.models import Artist, Song
 
 
 @method_decorator(login_required, name='dispatch')
@@ -21,12 +21,14 @@ class ArtistIndex(View):
 
     def get(self, request):
         try:
-            
-            rand = rand_artist(artists)
-            song_url = get_rand_track_for_artist(rand)
+            artists = Artist.objects.all()
+            artist = rand(artists)
+            songs = artist.song_set.all()
+            for song in songs:
+                song_url = song.url
         except ImportError:
             raise Http404("No Artists")
-        return render(request, 'main/artist_index.html', {'rand': rand, 'song_url': song_url})
+        return render(request, 'main/artist_index.html', {'artist': artist, 'song_url': song_url})
 
     def post(self, request):
         if request.method == "POST":
