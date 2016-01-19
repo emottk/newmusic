@@ -5,9 +5,10 @@ from django.conf import settings
 
 
 # create client object with app credentials
-client = soundcloud.Client(client_id=settings.SOCIAL_AUTH_SOUNDCLOUD_KEY,
-                           client_secret=settings.SOCIAL_AUTH_SOUNCLOUD_SECRET,
-                           redirect_uri='http://localhost:8000/users/register-by-token/soundcloud')
+client = soundcloud.Client(
+    client_id=settings.SOCIAL_AUTH_SOUNDCLOUD_KEY,
+    client_secret=settings.SOCIAL_AUTH_SOUNCLOUD_SECRET,
+    redirect_uri='http://localhost:8000/users/register-by-token/soundcloud')
 
 
 def get_artists():
