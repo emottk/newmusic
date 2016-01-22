@@ -19,4 +19,4 @@ class Song(models.Model):
 class Opinion(models.Model):
     opinion = models.BooleanField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # artist = models.ForeignKey('main.Artist', on_delete=models.CASCADE)
+    artist = models.ForeignKey('main.Artist', on_delete=models.CASCADE)
