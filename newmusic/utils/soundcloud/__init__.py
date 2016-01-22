@@ -16,14 +16,14 @@ def get_artists():
     artists_list = []
     url = '/users'
     counter = 0
-    max_artists = 100
+    max_artists = 200
     while len(artists_list) < max_artists and counter < 20:
         response = client.get(url, limit=page_size, linked_partitioning=1)
         # response2 = client.get('/users/{artist.id}/tracks')
         for resource in response.collection:
             if (
                 resource.followers_count >= 200 and
-                resource.followers_count <= 2000 and
+                resource.followers_count <= 5000 and
                 resource.track_count > 0
             ):
                 artists_list.append({
