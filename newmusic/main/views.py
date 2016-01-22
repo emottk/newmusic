@@ -5,40 +5,40 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 
-from newmusic.utils.soundcloud import get_artists, rand, get_rand_track_for_artist
+from newmusic.utils.soundcloud import rand
+from newmusic.utils.opinions import sort_opinion
 from newmusic.main.forms import OpinionForm
-from newmusic.main.models import Artist, Song
+from newmusic.main.models import Artist
 
 
 @method_decorator(login_required, name='dispatch')
 class ArtistIndex(View):
     template_name = "main/artist_index.html"
 
-    # def save(self, request):
-    #     try:
-    #         a = Artist(name=request.POST.get(''))
-    #
-
     def get(self, request):
         try:
             artists = Artist.objects.all()
             artist = rand(artists)
             songs = artist.song_set.all()
+            sort = sort_opinion(request)
+            false_list = sort[1]
             for song in songs:
                 song_url = song.url
         except ImportError:
             raise Http404("No Artists")
-        return render(request, 'main/artist_index.html', {'artist': artist, 'song_url': song_url})
+        return render(request, 'main/artist_index.html', {'artist': artist, 'song_url': song_url, "false_list": false_list})
 
     def post(self, request):
-        if request.method == "POST":
-            form = OpinionForm({'opinion': False, 'user': request.user})
-            import ipdb; ipdb.set_trace()
-            if form.is_valid():
-                return redirect(request.path)
-            else:
-                print(form.errors)
-                return HttpResponse("Form is invalid")
+        form = OpinionForm(request.POST)
+        if form.is_valid():
+            opinion = form.save(commit=False)
+            opinion.user = request.user
+            print("saving")
+            opinion.save()
+            return redirect('/')
+        else:
+            print(form.errors)
+            return HttpResponse("Form is invalid")
 
 # class SongIndex(View):
 #     template_name = "main/song_index.html"
