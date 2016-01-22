@@ -1,0 +1,15 @@
+<html>
+{{ username }}
+<h4>these are the artists your dumb ass likes...</h4>
+<ol>
+{% for opinion in true_list %}
+ <li><a href="{{ opinion.artist.url }}">{{ opinion.artist.name }}</a></li>
+{% endfor %}
+</ol>
+
+<h4>these are the artists your dumb ass does not like...</h4>
+<ol>
+  {% for opinion in false_list %}
+  <li><a href="{{ opinion.artist.url }}">{{ opinion.artist.name }}</a></li>
+  {% endfor %}
+</ol>
