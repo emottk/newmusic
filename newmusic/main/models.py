@@ -5,7 +5,7 @@ from django.conf import settings
 
 class Artist(models.Model):
     name = models.CharField(max_length=100)
-    sc_id = models.IntegerField()
+    sc_id = models.IntegerField(unique=True)
     url = models.CharField(max_length=100)
     avatar_url = models.CharField(max_length=100)
 
@@ -20,3 +20,6 @@ class Opinion(models.Model):
     opinion = models.BooleanField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     artist = models.ForeignKey('main.Artist', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ("user", "artist")
