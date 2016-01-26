@@ -41,7 +41,10 @@ def get_artists():
     return artists_list
 
 def rand(list):
-    return random.choice(list)
+    used_artists = []
+    choice = random.choice(list)
+    used_artists.append(choice)
+    return choice
 
 def get_rand_track_for_artist(artist):
     response = client.get('users/{}/tracks'.format(artist.sc_id))
@@ -49,6 +52,19 @@ def get_rand_track_for_artist(artist):
     permalink = track.obj['permalink']
     permalink_url = track.obj['permalink_url']
     return (permalink, permalink_url)
+
+def create_list():
+    artist_list = []
+    artists = Artist.objects.all()
+    for a in artists:
+        artist_list.append(a)
+    return artist_list
+
+def unique(artist_list):
+    ar = artist_list.pop()
+    return(ar, artist_list)
+
+
 
         # songs_list.append{}
     # page_size = 100
