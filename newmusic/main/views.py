@@ -5,8 +5,7 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 
-from newmusic.utils.soundcloud import rand
-from newmusic.utils.opinions import sort_opinion
+from newmusic.utils.soundcloud import rand, create_list, unique
 from newmusic.main.forms import OpinionForm
 from newmusic.main.models import Artist
 
@@ -17,28 +16,30 @@ class ArtistIndex(View):
 
     def get(self, request):
         try:
-            artists = Artist.objects.all()
-            artist = rand(artists)
+            artists = create_list()
+            artist, artists = unique(artists)
             songs = artist.song_set.all()
-            sort = sort_opinion(request)
-            false_list = sort[1]
             for song in songs:
                 song_url = song.url
         except ImportError:
             raise Http404("No Artists")
-        return render(request, 'main/artist_index.html', {'artist': artist, 'song_url': song_url, "false_list": false_list})
+        return render(request, 'main/artist_index.html', {'artist': artist, 'song_url': song_url})
 
     def post(self, request):
-        form = OpinionForm(request.POST)
-        if form.is_valid():
-            opinion = form.save(commit=False)
-            opinion.user = request.user
-            print("saving")
-            opinion.save()
-            return redirect('/')
-        else:
-            print(form.errors)
-            return HttpResponse("Form is invalid")
+        try:
+            form = OpinionForm(request.POST)
+            if form.is_valid():
+                opinion = form.save(commit=False)
+                opinion.user = request.user
+                opinion.save()
+            else:
+                print(form.errors)
+                return HttpResponse("Form is invalid")
+        except ImportError:
+            raise Http404("already opinion-ed")
+        return redirect('/')
+
+
 
 # class SongIndex(View):
 #     template_name = "main/song_index.html"
@@ -54,6 +55,3 @@ class ArtistIndex(View):
 #
 # class AboutView(View):
 #     template_name = "main/about.html"
-#
-# class TemplateView(View)
-#     pass
