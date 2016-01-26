@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.conf import settings
 from django.views.generic import View
-from newmusic.utils.opinions import sort_opinion
+from newmusic.utils.opinions import sort_true, sort_false, unique_list
 
 # create client object with app credentials
 client = soundcloud.Client(
@@ -22,10 +22,10 @@ class UserView(View):
         if request.user.is_authenticated():
             user = request.user
             username = user.get_username()
-            sort = sort_opinion(request)
-            true_list = sort[0]
-            false_list = sort[1]
-            return render(request, 'user_page.html', {'username': username, 'true_list': true_list, 'false_list': false_list})
+            true_list = sort_true(request)
+            false_list = sort_false(request)
+            unique = unique_list(request)
+            return render(request, 'user_page.html', {'username': username, 'true_list': true_list, 'false_list': false_list, 'unique': unique})
         else:
             return render(request, 'home.html', {"soundcloud_redirect" : client.authorize_url()})
 
@@ -49,6 +49,6 @@ class UserView(View):
         print(user)
         if user:
             login(request, user)
-            return redirect('/users/check')
+            return redirect('/')
         else:
             return HttpResponse("error")

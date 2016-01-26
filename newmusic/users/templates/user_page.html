@@ -13,3 +13,10 @@
   <li><a href="{{ opinion.artist.url }}">{{ opinion.artist.name }}</a></li>
   {% endfor %}
 </ol>
+
+<h4> unique list </h4>
+<ol>
+  {% for o in unique %}
+  <li>{{ o.artist.name }}</li>
+  {% endfor %}
+</ol>
