@@ -2,7 +2,8 @@
 {% block 'content' %}
 
 
-{{ username }}
+<a href='{{ permalink_url }}'>{{ username }}</a><br>
+<a href='{{ permalink_url }}'><img src='{{ avatar_url }}'></a>
 <h4>these are the artists your dumb ass likes...</h4>
 
 {% for opinion in true_list %}
@@ -12,15 +13,4 @@
   <br>
   <br>
 {% endfor %}
-
-
-<h4>these are the artists your dumb ass does not like...</h4>
-
-  {% for opinion in false_list %}
-  <br>
-  <a href="{{ opinion.artist.url }}">{{ opinion.artist.name }}</a>
-  <br><a href="{{ opinion.artist.url }}"><img src= "{{ opinion.artist.avatar_url }}"></a>
-  <br>
-  <br>
-  {% endfor %}
 {% endblock %}

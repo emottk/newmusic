@@ -7,11 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from social.apps.django_app.utils import psa
 from django.shortcuts import render, redirect
-from django.template import loader
 from django.conf import settings
-from django.views.generic import View
-from django.utils.decorators import method_decorator
-from newmusic.utils.opinions import sort_true, sort_false, unique_list
+#from newmusic.main.models import Extra
+from newmusic.utils.soundcloud import get_user_avatar, get_user_permalink
+from newmusic.utils.opinions import sort_true, sort_false
 
 # create client object with app credentials
 client = soundcloud.Client(
@@ -22,9 +21,17 @@ client = soundcloud.Client(
 
 @login_required
 def user_root(request, username):
-    true_list = sort_true(request)
-    false_list = sort_false(request)
-    return render(request, 'user_page.html', {'username': username, 'true_list': true_list, 'false_list': false_list})
+    true_list = sort_true(request.user)
+    false_list = sort_false(request.user)
+    avatar_url = get_user_avatar(request.user)
+    permalink_url = get_user_permalink(request.user)
+    return render(request, 'user_page.html', {
+        'username': username,
+        'true_list': true_list,
+        'false_list': false_list,
+        'avatar_url': avatar_url,
+        'permalink_url': permalink_url,
+        })
 
 @psa('social:complete')
 def register_by_access_token(request, backend):
@@ -33,7 +40,7 @@ def register_by_access_token(request, backend):
     resource = client.exchange_token(code)
     user = request.backend.do_auth(resource.access_token)
     if user:
-        redirect_url = reverse('artist_index')
+        redirect_url = reverse('explore')
         if "next" in request.session:
             redirect_url = request.session.pop("next")
         login(request, user)
@@ -50,4 +57,4 @@ def login_redirect(request):
 def logout_view(request):
     logout(request)
     messages.success(request, "You have successfully logged out!")
-    return redirect(reverse('about_index'))
+    return redirect(reverse('about'))
