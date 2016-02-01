@@ -9,6 +9,8 @@ class Artist(models.Model):
     url = models.CharField(max_length=100)
     avatar_url = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
 
 class Song(models.Model):
     name = models.CharField(max_length=100)
