@@ -1,22 +1,26 @@
-<html>
+{% extends '__base.html' %}
+{% block 'content' %}
+
+
 {{ username }}
 <h4>these are the artists your dumb ass likes...</h4>
-<ol>
+
 {% for opinion in true_list %}
- <li><a href="{{ opinion.artist.url }}">{{ opinion.artist.name }}</a></li>
+  <br>
+  <a href="{{ opinion.artist.url }}">{{ opinion.artist.name }}</a>
+  <br><a href="{{ opinion.artist.url }}"><img src= "{{ opinion.artist.avatar_url }}"></a>
+  <br>
+  <br>
 {% endfor %}
-</ol>
+
 
 <h4>these are the artists your dumb ass does not like...</h4>
-<ol>
-  {% for opinion in false_list %}
-  <li><a href="{{ opinion.artist.url }}">{{ opinion.artist.name }}</a></li>
-  {% endfor %}
-</ol>
 
-<h4> unique list </h4>
-<ol>
-  {% for o in unique %}
-  <li>{{ o.artist.name }}</li>
+  {% for opinion in false_list %}
+  <br>
+  <a href="{{ opinion.artist.url }}">{{ opinion.artist.name }}</a>
+  <br><a href="{{ opinion.artist.url }}"><img src= "{{ opinion.artist.avatar_url }}"></a>
+  <br>
+  <br>
   {% endfor %}
-</ol>
+{% endblock %}
