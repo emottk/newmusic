@@ -16,7 +16,11 @@ class Command(BaseCommand):
                         name=artist['permalink'],
                         sc_id=artist['id'],
                         url=artist['permalink_url'],
-                        avatar_url=artist['avatar_url']
+                        avatar_url=artist['avatar_url'],
+                        country=artist['country'],
+                        city=artist['city'],
+                        website=artist['website'],
+                        description=artist['description'],
                         )
                     a.save()
             except Artist.DoesNotExist:

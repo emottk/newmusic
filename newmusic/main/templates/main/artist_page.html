@@ -1,0 +1,25 @@
+{% extends '__base.html' %}
+{% block 'content' %}
+{% if artist %}
+<h1><a href="{{ artist.url }}">{{ artist.name }}</a></h1>
+<a href="{{ artist.url }}"><img src=" {{ artist.avatar_url }}"></a>
+<br>
+<br>
+{% if artist.city %}
+{% if artist.country %}
+<strong>From:</strong>
+{{ artist.city }}, {{ artist.country }}
+{% endif %}
+{% endif %}
+<br>
+{% if artist.description %}
+<strong>Description:</strong>
+{{ artist.description }}
+{% endif %}
+<br>
+{% if artist.webiste %}
+<strong>Website:</strong>
+<a href="{{ artist.website }}">{{ artist.website }}</a>
+{% endif %}
+{% endif %}
+{% endblock %}

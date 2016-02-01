@@ -1,0 +1,42 @@
+{% extends '__base.html' %}
+{% block 'content' %}
+<meta charset="utf-8">
+
+<style>
+div.forms {
+  display:inline-block;
+}
+</style>
+
+<div class="artist" style="padding:20px">
+{% if artist %}
+<head>
+<h1><a href="{% url 'artist_page' artist %}">{{ artist }}</a></h1>
+</head>
+
+<body>
+  <iframe src="https://w.soundcloud.com/player/?url={{ song_url }}&auto_play=false" width=500px scrolling="yes"></iframe>
+      <br>
+      <iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url={{ artist.url }}&color=orange_white&size=32" style="width: 32px; height: 32px;"></iframe>
+{% else %}
+    <p>No Artists Available</p>
+{% endif %}
+</div>
+
+<div class="forms">
+<form method='POST' action=''>{% csrf_token %}
+<input type='hidden' value='1' name='opinion' />
+<input type='hidden' value='{{ artist.id }}' name='artist' />
+<input type='submit' value='Like' />
+</form>
+
+<form method='POST' action=''>{% csrf_token %}
+<input type='hidden' value='false' name='opinion' />
+<input type='hidden' value='{{ artist.id }}' name='artist' />
+<input type='submit' value='Dislike' />
+</form>
+</div>
+
+</body>
+
+{% endblock %}
