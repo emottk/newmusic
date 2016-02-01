@@ -22,7 +22,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = '/users/check/'
+LOGIN_URL = '/users/login'
 
 # Application definition
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'newmusic.main',
     'newmusic.users',
+    'menu',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -58,6 +59,8 @@ OAUTH2_PROVIDER = {
     'SCOPES': {'read': 'Read scope', 'write': 'Write Scope'}
 }
 
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
 
 SOCIAL_AUTH_PIPELINE = (
@@ -103,7 +106,7 @@ ROOT_URLCONF = 'newmusic.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,6 +117,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.csrf',
+                'django.core.context_processors.request'
             ],
         },
     },
