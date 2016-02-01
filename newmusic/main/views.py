@@ -5,9 +5,10 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 
-from newmusic.utils.soundcloud import rand, create_list, unique
 from newmusic.main.forms import OpinionForm
 from newmusic.main.models import Artist
+from newmusic.utils.opinions import get_unique_artist
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -16,14 +17,14 @@ class ArtistIndex(View):
 
     def get(self, request):
         try:
-            artists = create_list()
-            artist, artists = unique(artists)
+            artist = get_unique_artist(request.user)
             songs = artist.song_set.all()
+            user = request.user
             for song in songs:
                 song_url = song.url
         except ImportError:
             raise Http404("No Artists")
-        return render(request, 'main/artist_index.html', {'artist': artist, 'song_url': song_url})
+        return render(request, 'main/artist_index.html', {'artist': artist, 'song_url': song_url, 'user': user})
 
     def post(self, request):
         try:
@@ -37,21 +38,10 @@ class ArtistIndex(View):
                 return HttpResponse("Form is invalid")
         except ImportError:
             raise Http404("already opinion-ed")
-        return redirect('/')
+        return redirect('/home')
 
+class AboutIndex(View):
+    template_name = "main/about_index.html"
 
-
-# class SongIndex(View):
-#     template_name = "main/song_index.html"
-#
-#     def get(self, request):
-#         try:
-#             artists_list = get_artists()
-#             songs_list = get_tracks(artists_list)
-#         except ImportError:
-#             raise Http404("No Songs")
-#         return render(request, 'main/song_index.html', {'songs_list': songs_list})
-#
-#
-# class AboutView(View):
-#     template_name = "main/about.html"
+    def get(self, request):
+        return render(request, "main/about_index.html")
