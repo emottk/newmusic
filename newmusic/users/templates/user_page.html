@@ -8,9 +8,11 @@
 
 {% for opinion in true_list %}
   <br>
-  <a href="{{ opinion.artist.url }}">{{ opinion.artist.name }}</a>
-  <br><a href="{{ opinion.artist.url }}"><img src= "{{ opinion.artist.avatar_url }}"></a>
+  <a href="{% url 'artist_page' opinion.artist.name %}">{{ opinion.artist.name }}</a>
+  <br><a href="{% url 'artist_page' opinion.artist.name %}"><img src= "{{ opinion.artist.avatar_url }}"></a>
   <br>
   <br>
 {% endfor %}
 {% endblock %}
+
+<a href="{% url 'artist_page' artist %}">{{ artist }}</a>
