@@ -2,6 +2,7 @@ import random
 import soundcloud
 
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from newmusic.main.models import Artist, Song
 
 # create client object with app credentials
@@ -19,7 +20,6 @@ def get_artists():
     max_artists = 200
     while len(artists_list) < max_artists and counter < 30:
         response = client.get(url, limit=page_size, linked_partitioning=1)
-        # response2 = client.get('/users/{artist.id}/tracks')
         for resource in response.collection:
             if (
                 resource.followers_count >= 200 and
@@ -32,6 +32,10 @@ def get_artists():
     				"followers_count": resource.followers_count,
     				"avatar_url": resource.avatar_url,
                     "id": resource.id,
+                    "country": resource.country,
+                    "city": resource.city,
+                    "website": resource.website,
+                    "description": resource.description,
     			})
             if len(artists_list) == max_artists:
                 break
@@ -57,35 +61,16 @@ def create_list():
         artist_list.append(a)
     return artist_list
 
-def unique(artist_list):
-    artist_list = create_list()
-    for b in artist_list:
-        print(b.name)
-    ar = artist_list.pop()
-    current_list = artist_list
-    print("chosen artist is: ", ar.name)
-    for a in current_list:
-        print(a.name)
-    while len(artist_list) > 0:
-        unique(current_list)
-        if len(current_list) == 0:
-            break
+def get_user_avatar(user):
+    try:
+        sc = user.social_auth.get(provider='soundcloud')
+    except ObjectDoesNotExist:
+        return None
+    return sc.extra_data.get('avatar_url')
 
-
-
-
-
-        # songs_list.append{}
-    # page_size = 100
-    # songs_list = []
-    # response = client.get('/tracks', limit=page_size)
-    # # for artist in artists_list:
-    # #     artist_id = artist.id
-    # for resource in response:
-    #     songs_list.append({
-    #         "user_id": resource.user_id,
-    #         "title": resource.title,
-    #         "permalink": resource.permalink,
-    #         "permalink_url": resource.permalink_url,
-    #     })
-    # return songs_list
+def get_user_permalink(user):
+    try:
+        sc = user.social_auth.get(provider='soundcloud')
+    except ObjectDoesNotExist:
+        return None
+    return sc.extra_data.get('permalink_url')
