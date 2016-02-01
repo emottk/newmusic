@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from newmusic.main.models import Artist, Opinion
+from newmusic.utils.soundcloud import rand
 
 def unique_list(request):
     user = request.user
@@ -26,3 +27,11 @@ def sort_false(request):
         if o.opinion == False:
             false_list.append(o)
     return false_list
+
+def get_unique_artist(user):
+    """
+    Return a random artist that a user has no opinion on
+
+    """
+    seen_ids = user.opinion_set.values_list("artist_id", flat=True)
+    return Artist.objects.exclude(id__in=seen_ids).order_by('?').first()

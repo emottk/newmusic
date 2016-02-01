@@ -17,7 +17,7 @@ def get_artists():
     url = '/users'
     counter = 0
     max_artists = 200
-    while len(artists_list) < max_artists and counter < 20:
+    while len(artists_list) < max_artists and counter < 30:
         response = client.get(url, limit=page_size, linked_partitioning=1)
         # response2 = client.get('/users/{artist.id}/tracks')
         for resource in response.collection:
@@ -41,10 +41,7 @@ def get_artists():
     return artists_list
 
 def rand(list):
-    used_artists = []
-    choice = random.choice(list)
-    used_artists.append(choice)
-    return choice
+    return random.choice(list)
 
 def get_rand_track_for_artist(artist):
     response = client.get('users/{}/tracks'.format(artist.sc_id))
@@ -61,8 +58,20 @@ def create_list():
     return artist_list
 
 def unique(artist_list):
+    artist_list = create_list()
+    for b in artist_list:
+        print(b.name)
     ar = artist_list.pop()
-    return(ar, artist_list)
+    current_list = artist_list
+    print("chosen artist is: ", ar.name)
+    for a in current_list:
+        print(a.name)
+    while len(artist_list) > 0:
+        unique(current_list)
+        if len(current_list) == 0:
+            break
+
+
 
 
 
