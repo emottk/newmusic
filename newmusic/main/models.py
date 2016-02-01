@@ -7,6 +7,7 @@ class Artist(models.Model):
     sc_id = models.IntegerField(unique=True)
     url = models.CharField(max_length=100)
     avatar_url = models.URLField(max_length=100)
+    followers_count = models.IntegerField()
     country = models.CharField(max_length=100, null=True, blank=True)
     city = models.CharField(max_length=100, null=True, blank=True)
     website = models.URLField(max_length=100, null=True, blank=True)

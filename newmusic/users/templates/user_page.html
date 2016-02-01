@@ -11,6 +11,8 @@
   <a href="{% url 'artist_page' opinion.artist.name %}">{{ opinion.artist.name }}</a>
   <br><a href="{% url 'artist_page' opinion.artist.name %}"><img src= "{{ opinion.artist.avatar_url }}"></a>
   <br>
+  <strong>Followers:</strong> {{ opinion.artist.followers_count }}
+  <br>
   <br>
 {% endfor %}
 {% endblock %}

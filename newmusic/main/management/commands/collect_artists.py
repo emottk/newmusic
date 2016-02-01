@@ -21,6 +21,7 @@ class Command(BaseCommand):
                         city=artist['city'],
                         website=artist['website'],
                         description=artist['description'],
+                        followers_count=artist['followers_count']
                         )
                     a.save()
             except Artist.DoesNotExist:
