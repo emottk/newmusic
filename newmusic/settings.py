@@ -51,7 +51,8 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 AUTHENTICATION_BACKENDS = (
-    'social.backends.soundcloud.SoundcloudOAuth2',
+    'newmusic.utils.backends.SoundcloudOAuth2',
+
     'django.contrib.auth.backends.ModelBackend',
 )
 
