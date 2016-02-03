@@ -1,29 +1,36 @@
-{% extends '__base.html' %}
-{% block 'content' %}
-{% if artist %}
-<h1><a href="{{ artist.url }}">{{ artist.name }}</a></h1>
-<a href="{{ artist.url }}"><img src=" {{ artist.avatar_url }}"></a>
-<br>
-<br>
-<strong>Followers:</strong> {{ artist.followers_count }}
-<br>
-{% if artist.city %}
-{% if artist.country %}
-<strong>From:</strong>
-{{ artist.city }}, {{ artist.country }}
-{% endif %}
-{% endif %}
-<br>
-{% if artist.description %}
-<strong>Description:</strong>
-{{ artist.description }}
-{% endif %}
-<br>
-{% if artist.webiste %}
-<strong>Website:</strong>
-<a href="{{ artist.website }}">{{ artist.website }}</a>
-{% endif %}
-{% endif %}
-<br>
-<iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url={{ artist.url }}&color=orange_white&size=32" style="width: 32px; height: 32px;"></iframe>
+{% extends '__base.html' %} {% block 'content' %} {% if artist %}
+
+<div class="container-fluid">
+  <div class="well">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h1><a href="{{ artist.url }}">{{ artist.name }}</a></h1>
+        <a href="{{ artist.url }}"><img src=" {{ artist.avatar_url }}"></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <div class="inline">
+          <h4><strong>Followers:</strong> {{ artist.followers_count }}
+          <br> {% if artist.city %} {% if artist.country %}
+          <strong>From:</strong> {{ artist.city }}, {{ artist.country }} {% endif %} {% endif %}
+          <br> {% if artist.description %}
+          <strong>Description:</strong> {{ artist.description }} {% endif %}
+          <br> {% if artist.webiste %}
+          <strong>Website:</strong>
+          <a href="{{ artist.website }}">{{ artist.website }}</a> {% endif %} {% endif %}
+        </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url={{ artist.url }}&color=orange_white&size=32" style="width: 32px; height: 32px;"></iframe>
+
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -1,18 +1,51 @@
-{% extends '__base.html' %}
-{% block 'content' %}
+{% extends '__base.html' %} {% block 'content' %}
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="well">
+        <a href='{{ permalink_url }}'><img src='{{ avatar_url }}'></a>
+        <h1><a href='{{ permalink_url }}'>{{ username }}</a></h1>
+      </div>
+    </div>
 
-<a href='{{ permalink_url }}'>{{ username }}</a><br>
-<a href='{{ permalink_url }}'><img src='{{ avatar_url }}'></a>
-<h4>these are the artists your dumb ass likes...</h4>
+  </div>
 
-{% for opinion in true_list %}
-  <br>
-  <a href="{% url 'artist_page' opinion.artist.name %}">{{ opinion.artist.name }}</a>
-  <br><a href="{% url 'artist_page' opinion.artist.name %}"><img src= "{{ opinion.artist.avatar_url }}"></a>
-  <br>
-  <strong>Followers:</strong> {{ opinion.artist.followers_count }}
-  <br>
-  <br>
-{% endfor %}
+  {% if true_list %}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="well">
+        <h4>these are the artists your dumb ass likes...</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    {% for opinion in true_list %}
+    <div class="col-lg-3">
+      <div class="well">
+        <h4><a href="{% url 'artist_page' opinion.artist.name %}">{{ opinion.artist.name }}</a>
+        <br>
+        <a href="{% url 'artist_page' opinion.artist.name %}"><img src="{{ opinion.artist.avatar_url }}"></a>
+        <br>
+        <strong>Followers:</strong> {{ opinion.artist.followers_count }}
+        <br>
+      </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="well">
+          <h4>you don't like any damn artists</h4>
+          <h5><a href="{% url 'explore' %}">start likin' shit here</a></h5>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

@@ -1,13 +1,24 @@
-{% extends '__base.html' %}
+{% extends '__base.html' %} {% block 'content' %}
+<div class="container-fluid">
+  {% if messages %}
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="well">
+        <div class="messages">
+          {% for message in messages %}
+          <h4>{{ message }}</h4> {% endfor %} {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="well">
+          <h4>this is all about what this site does 'n shit</h4>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
 
-{% block 'content' %}
-{% if messages %}
-<div class="messages">
-    {% for message in messages %}
-      {{ message }}
-    {% endfor %}
-{% endif %}
-<br>
-<br>
-This is all about what this site does 'n shit
-{% endblock %}
+
+  </div>
+</div>

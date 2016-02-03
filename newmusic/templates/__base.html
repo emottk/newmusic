@@ -1,7 +1,20 @@
+{% load staticfiles %}
 <!doctype html>
 <html>
 
-{% include 'menus.html' %}
-
+  <head>
+    {% include 'header.html' %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'static/style.css' %}">
+  </head>
   {% block 'content' %}{% endblock %}
+  <br>
+  <br>
+  <br>
+  <br>
+  <br> {% include 'footer.html' %}
+
+
 </html>

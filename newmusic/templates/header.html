@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <div class="row">
+    <div class="col-xs-12">
+      <ul class="nav navbar-nav">
+        <div class="navbar-header">
+          <strong class="navbar-brand">newmusic</strong>
+        </div>
+        <li><a href="{% url 'explore' %}">Explore</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'user_page' user.username %}">{{ user.username }}</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a> {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+</nav>
