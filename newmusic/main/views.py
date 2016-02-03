@@ -21,7 +21,15 @@ class ArtistIndex(View):
         user = request.user
         for song in songs:
             song_url = song.url
-        return render(request, self.template_name, {'artist': artist, 'song_url': song_url, 'user': user})
+        like_form = OpinionForm({'artist': artist.id, 'opinion': True})
+        dislike_form = OpinionForm({'artist': artist.id, 'opinion': False})
+        return render(request, self.template_name, {
+            'artist': artist,
+            'song_url': song_url,
+            'user': user,
+            'like_form': like_form,
+            'dislike_form': dislike_form,
+        })
 
     def post(self, request):
         form = OpinionForm(request.POST)
@@ -32,7 +40,7 @@ class ArtistIndex(View):
         else:
             print(form.errors)
             return HttpResponse("Form is invalid")
-        return redirect('/home')
+        return redirect('explore')
 
 
 class AboutIndex(View):
