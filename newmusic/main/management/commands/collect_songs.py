@@ -6,9 +6,6 @@ class Command(BaseCommand):
     help = "Collects songs from artists and saves into database"
 
     def handle(self, **options):
-        # artists = Artist.objects.all()
-        # for artist in artists:
-        #     response = client
         artists = Artist.objects.all()
         for artist in artists:
             song = get_rand_track_for_artist(artist)

@@ -18,11 +18,11 @@ def get_artists():
     url = '/users'
     counter = 0
     max_artists = 200
-    while len(artists_list) < max_artists and counter < 30:
+    while len(artists_list) < max_artists and counter < 20:
         response = client.get(url, limit=page_size, linked_partitioning=1)
         for resource in response.collection:
             if (
-                resource.followers_count >= 200 and
+                resource.followers_count >= 1000 and
                 resource.followers_count <= 5000 and
                 resource.track_count > 0
             ):

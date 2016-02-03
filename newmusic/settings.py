@@ -126,6 +126,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'newmusic.wsgi.application'
 
+STATICFILES_DIRS = [
+    ('static', '/Users/emilykowal/workspace/newmusic/newmusic/static'),
+]
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
