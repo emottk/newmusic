@@ -7,7 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'static/style.css' %}">
+    <link rel="stylesheet" href="{% static 'static/css/style.css' %}" />
+    {% block 'scripts' %}
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'static/js/utils.js' %}"></script>
+    {% endblock %}
   </head>
   {% block 'content' %}{% endblock %}
   <br>
