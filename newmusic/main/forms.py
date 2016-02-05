@@ -10,3 +10,11 @@ class OpinionForm(ModelForm):
         model = Opinion
         fields = ['opinion', 'artist']
         widgets = {'artist': forms.HiddenInput()}
+
+
+class DeleteOpinionForm(forms.ModelForm):
+
+    class Meta:
+        model = Opinion
+        fields = ['opinion']
+        widgets = {'opinion': forms.HiddenInput()}

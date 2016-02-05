@@ -1,51 +1,64 @@
-{% extends '__base.html' %} {% block 'content' %}
+{% extends '__base.html' %}
+{% load staticfiles %}
+{% block 'scripts' %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'static/js/artist.js' %}"></script>
+{% endblock %}
+{% block 'content' %}
 {% if artist %}
 <div class="container-fluid">
   <div class="well">
-  <div class="row">
-    <div class="col-xs-12">
-      <h1><a href="{% url 'artist_page' artist %}">{{ artist }}</a></h1>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
-        <iframe src="https://w.soundcloud.com/player/?url={{ song_url }}&auto_play=true" width=500px scrolling="yes"></iframe>
-    </div>
-  </div>
-
-  {% else %}
-
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="well">
-        <p>No Artists Available</p>
+    <div class="row">
+      <div class="col-xs-12">
+        <h1><a href="{% url 'artist_page' artist %}">{{ artist }}</a></h1>
       </div>
     </div>
-  </div>
 
-  {% endif %}
+    <div class="row">
+      <div class="col-xs-12">
+        <iframe src="https://w.soundcloud.com/player/?url={{ song_url }}&auto_play=true" width=500px scrolling="yes"></iframe>
+      </div>
+    </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <form class="form" method='POST' action=''>{% csrf_token %}
-        <div class="form-group">
-          {{ like_form.as_p }}
-          <button type='submit' class="btn btn-default">Like</button>
+    {% else %}
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="well">
+          <p>No Artists Available</p>
         </div>
-      </form>
+      </div>
+    </div>
 
-      <form class="form" method='POST' action=''>{% csrf_token %}
-        <div class="form-group">
-          {{ dislike_form.as_p }}
-          <button type='submit' class="btn btn-default">Dislike</button>
+    {% endif %}
+
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form" id="like" method='POST' action=''>{% csrf_token %}
+          <div class="form-group">
+            {{ like_form.as_p }}
+            <button type='submit' id="like_button" class="btn btn-default">Like</button>
+          </div>
+        </form>
+
+        <form class="form" id="dislike" method='POST' action=''>{% csrf_token %}
+          <div class="form-group">
+            {{ dislike_form.as_p }}
+            <button type='submit' id="dislike_button" class="btn btn-default">Dislike</button>
+          </div>
+        </form>
+
+        <button class="btn btn-default" id="next" onClick="parent.location=''">Next</button>
+      </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="text-muted" id="success"><span class="glyphicon glyphicon-ok"></span> Saved</p>
+          </div>
         </div>
-      </form>
     </div>
   </div>
-  </div>
-</div>
 
 
 
-{% endblock %}
+  {% endblock %}

@@ -43,6 +43,17 @@ class ArtistIndex(View):
         return redirect('explore')
 
 
+@method_decorator(login_required, name='dispatch')
+class OpinionDelete(View):
+
+    def post(self, request, pk):
+        opinion = get_object_or_404(request.user.opinion_set, pk=pk)
+        opinion.delete()
+        if request.is_ajax():
+            return HttpResponse(status=204)
+        return redirect("user_page", request.user.username)
+
+
 class AboutIndex(View):
     template_name = "main/about.html"
 
