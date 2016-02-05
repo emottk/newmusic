@@ -1,0 +1,42 @@
+h1 a {
+  color: #FCA205;
+}
+form, form div {
+  display: inline;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  float: right;
+}
+p.text-muted {
+  text-align: left;
+}
+#success {
+  text-align: center;
+}
+div.well {
+  text-align: center;
+}
+#delete_notice {
+  display: none;
+  text-align: center;
+}
+
+.user_row {
+  position: relative;
+}
+
+.hover-btn {
+  position: absolute;
+  top: 0px;
+  right: 15px;
+  display: none;
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.col-lg-3:hover .hover-btn {
+  display: block;
+}
