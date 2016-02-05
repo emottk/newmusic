@@ -1,4 +1,10 @@
-{% extends '__base.html' %} {% block 'content' %}
+{% extends '__base.html' %}
+{% load staticfiles %}
+{% block 'content' %}
+{% block 'scripts' %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'static/js/user.js' %}"></script>
+{% endblock %}
 
 <div class="container-fluid">
   <div class="row">
@@ -8,8 +14,14 @@
         <h1><a href='{{ permalink_url }}'>{{ username }}</a></h1>
       </div>
     </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="text-muted" id="delete_notice"><span class="glyphicon glyphicon-ok"></span> Deleted</p>
+      </div>
+    </div>
 
   </div>
+
 
   {% if true_list %}
 
@@ -21,18 +33,28 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row user_row">
     {% for opinion in true_list %}
+
     <div class="col-lg-3">
       <div class="well">
+        <form class="form delete hover-btn" method='POST' action="{% url 'opinion_delete' opinion.pk %}">{% csrf_token %}
+          <div class="form-group">
+            <button type='submit' id="delete_button" class="btn btn-default">  <span class="glyphicon glyphicon-remove-circle"
+              </span>
+            </button>
+          </div>
+        </form>
         <h4><a href="{% url 'artist_page' opinion.artist.name %}">{{ opinion.artist.name }}</a>
         <br>
         <a href="{% url 'artist_page' opinion.artist.name %}"><img src="{{ opinion.artist.avatar_url }}"></a>
         <br>
         <strong>Followers:</strong> {{ opinion.artist.followers_count }}
         <br>
+
       </div>
     </div>
+
     {% endfor %}
 
     {% else %}

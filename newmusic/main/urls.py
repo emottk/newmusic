@@ -1,10 +1,11 @@
-from django.conf.urls import include, url, patterns
+from django.conf.urls import url, patterns
 
-from main.views import ArtistIndex, AboutIndex, ArtistPage
+from main import views
 
 
 urlpatterns = patterns('',
-    url(r'^home/$', ArtistIndex.as_view(), name="explore"),
-    url(r'^about/$', AboutIndex.as_view(), name="about"),
-    url(r'^artist/(?P<artist>[\w.@+-]+)/$', ArtistPage.as_view(), name="artist_page"),
+    url(r'^home/$', views.ArtistIndex.as_view(), name="explore"),
+    url(r'^about/$', views.AboutIndex.as_view(), name="about"),
+    url(r'^artist/(?P<artist>[\w.@+-]+)/$', views.ArtistPage.as_view(), name="artist_page"),
+    url(r'^opinion/delete/(?P<pk>\d+)$', views.OpinionDelete.as_view(), name="opinion_delete"),
 )
