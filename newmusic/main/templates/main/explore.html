@@ -1,12 +1,8 @@
-{% extends '__base.html' %}
-{% load staticfiles %}
-{% block 'scripts' %}
-{{ block.super }}
-<script type="text/javascript" src="{% static 'static/js/artist.js' %}"></script>
-{% endblock %}
-{% block 'content' %}
-{% if artist %}
-<div class="container-fluid">
+{% extends '__base.html' %} {% load staticfiles %} {% block 'scripts' %} {{ block.super }}
+<script type="text/javascript" src="{% static 'js/explore.js' %}"></script>
+{% endblock %} {% block 'content' %}
+
+<div class="container-fluid animated fadeInLeft" id="artist_explore">
   <div class="well">
     <div class="row">
       <div class="col-xs-12">
@@ -20,17 +16,7 @@
       </div>
     </div>
 
-    {% else %}
 
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="well">
-          <p>No Artists Available</p>
-        </div>
-      </div>
-    </div>
-
-    {% endif %}
 
     <div class="row">
       <div class="col-xs-12">
@@ -48,17 +34,17 @@
           </div>
         </form>
 
-        <button class="btn btn-default" id="next" onClick="parent.location=''">Next</button>
+          <a href="{% url 'explore' %}" class="btn btn-default" id="next">Next</a>
+
       </div>
 
-        <div class="row">
-          <div class="col-xs-12">
-            <p class="text-muted" id="success"><span class="glyphicon glyphicon-ok"></span> Saved</p>
-          </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="text-muted" id="success"><span class="glyphicon glyphicon-ok"></span> Saved</p>
         </div>
+      </div>
     </div>
   </div>
+</div>
 
-
-
-  {% endblock %}
+{% endblock %}
