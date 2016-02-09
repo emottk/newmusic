@@ -128,7 +128,7 @@ WSGI_APPLICATION = 'newmusic.wsgi.application'
 
 
 STATICFILES_DIRS = (
-    ("static", "/Users/emilykowal/workspace/newmusic/newmusic/static"),
+    "/Users/emilykowal/workspace/newmusic/newmusic/static",
 )
 
 # Database
