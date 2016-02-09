@@ -17,6 +17,8 @@ class ArtistIndex(View):
 
     def get(self, request):
         artist = get_unique_artist(request.user)
+        if artist is None:
+            return render(request, "main/no_artist.html")
         songs = artist.song_set.all()
         user = request.user
         for song in songs:
@@ -65,4 +67,5 @@ class ArtistPage(View):
     template_name = "main/artist_page.html"
     def get(self, request, artist):
         artist_object = get_object_or_404(Artist, name=artist)
-        return render(request, self.template_name, {'artist': artist_object})
+        song_url = artist_object.song_set.first().url
+        return render(request, self.template_name, {'artist': artist_object, 'song_url': song_url})

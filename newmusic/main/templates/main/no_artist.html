@@ -1,0 +1,19 @@
+{% extends '__base.html' %}
+{% load staticfiles %}
+{% block 'scripts' %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'js/explore.js' %}"></script>
+{% endblock %}
+{% block 'content' %}
+<div class="container-fluid">
+  <div class="well">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h4>There are no more artists to choose from.<br>
+        Learn more about your favorite artists
+        <a href="{% url 'user_page' user.username %}">here!</a></h4>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
