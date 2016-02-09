@@ -2,7 +2,7 @@ $(function() {
   $('form.delete').on('submit', function(e) {
     e.preventDefault();
     var form = $(this);
-    form.closest('div.col-lg-3').addClass('animated fadeOut')
+    form.closest('div.col-lg-3')
     $.ajax({
         type: form.attr('method'),
         url: e.target.action,
@@ -10,7 +10,7 @@ $(function() {
       })
       .done(function() {
         $('#delete_notice').show();
-        form.closest('div.col-lg-3').fadeOut('slow');
+        form.closest('div.col-lg-3').fadeOut('fast').delay('slow');
       });
     });
   });
