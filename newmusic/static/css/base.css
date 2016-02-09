@@ -42,3 +42,7 @@ div.well {
 #artist_explore {
   -webkit-animation-duration: 0.5s;
 }
+
+body {
+  font-family: 'Lato', sans-serif;
+}
