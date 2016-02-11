@@ -1,10 +1,12 @@
 import random
 import soundcloud
+import logging
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from newmusic.main.models import Artist, Song
 
+logger = logging.getLogger(__name__)
 # create client object with app credentials
 client = soundcloud.Client(
     client_id=settings.SOCIAL_AUTH_SOUNDCLOUD_KEY,
@@ -18,7 +20,10 @@ def get_artists():
     url = '/users'
     counter = 0
     max_artists = 200
-    while len(artists_list) < max_artists and counter < 40:
+    while url and len(artists_list) < max_artists:
+        logger.warning(
+            'retrieving artists, currently have %s, on loop %s',
+            len(artists_list), counter)
         response = client.get(url, limit=page_size, linked_partitioning=1)
         for resource in response.collection:
             if (
@@ -40,7 +45,7 @@ def get_artists():
             if len(artists_list) == max_artists:
                 break
         counter = counter + 1
-        url = response.next_href
+        url = getattr(response, 'next_href', None)
     artists_list = sorted(artists_list, key=lambda artist: artist["followers_count"])
     return artists_list
 
