@@ -19,15 +19,16 @@ class ArtistIndex(View):
         artist = get_unique_artist(request.user)
         if artist is None:
             return render(request, "main/no_artist.html")
-        songs = artist.song_set.all()
         user = request.user
-        for song in songs:
-            song_url = song.url
+        song = artist.song_set.first()
+        song_url = song.url
+        song_pb_count = song.playback_count
         like_form = OpinionForm({'artist': artist.id, 'opinion': True})
         dislike_form = OpinionForm({'artist': artist.id, 'opinion': False})
         return render(request, self.template_name, {
             'artist': artist,
             'song_url': song_url,
+            'song_pb_count': song_pb_count,
             'user': user,
             'like_form': like_form,
             'dislike_form': dislike_form,
@@ -68,4 +69,5 @@ class ArtistPage(View):
     def get(self, request, artist):
         artist_object = get_object_or_404(Artist, name=artist)
         song_url = artist_object.song_set.first().url
-        return render(request, self.template_name, {'artist': artist_object, 'song_url': song_url})
+        song_pb_count = artist_object.song_set.first().playback_count
+        return render(request, self.template_name, {'artist': artist_object, 'song_url': song_url, 'song_pb_count': song_pb_count})

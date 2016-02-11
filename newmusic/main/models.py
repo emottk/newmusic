@@ -19,6 +19,7 @@ class Artist(models.Model):
 class Song(models.Model):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=100)
+    playback_count = models.IntegerField()
     artist = models.ForeignKey('main.Artist', on_delete=models.CASCADE)
 
 

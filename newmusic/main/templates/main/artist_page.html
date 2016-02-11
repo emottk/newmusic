@@ -30,7 +30,10 @@
     <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#song" aria-expanded="false" aria-controls="song"><span class="glyphicon glyphicon-music"></span></button>
     <div class="collapse" id="song">
       <div class="card card-block">
-        <iframe src="https://w.soundcloud.com/player/?url={{ song_url }}&auto_play=false" width=500px scrolling="yes"></iframe>
+        <iframe src="https://w.soundcloud.com/player/?url={{ song_url }}&auto_play=false" width=500px scrolling="yes"></iframe><br>
+        {% if song_pb_count %}
+        <strong>Playback Count:</strong> {{ song_pb_count }}
+        {% endif %}
       </div>
     </div>
   </div>
