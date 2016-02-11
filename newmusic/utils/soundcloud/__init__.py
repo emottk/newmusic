@@ -44,22 +44,17 @@ def get_artists():
     artists_list = sorted(artists_list, key=lambda artist: artist["followers_count"])
     return artists_list
 
-def rand(list):
-    return random.choice(list)
-
-def get_rand_track_for_artist(artist):
-    response = client.get('users/{}/tracks'.format(artist.sc_id))
+def get_rand_track_for_artist(artist_obj):
+    response = client.get('users/{}/tracks'.format(artist_obj.sc_id))
     track = random.choice(response)
     permalink = track.obj['permalink']
     permalink_url = track.obj['permalink_url']
-    return (permalink, permalink_url)
-
-def create_list():
-    artist_list = []
-    artists = Artist.objects.all()
-    for a in artists:
-        artist_list.append(a)
-    return artist_list
+    playback_count = track.obj['playback_count']
+    return ({
+        'permalink':permalink,
+        'permalink_url':permalink_url,
+        'playback_count':playback_count
+        })
 
 def get_user_avatar(user):
     try:

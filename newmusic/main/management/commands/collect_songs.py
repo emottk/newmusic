@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from newmusic.utils.soundcloud import get_rand_track_for_artist
 from newmusic.main.models import Artist, Song
 
@@ -8,14 +8,16 @@ class Command(BaseCommand):
     def handle(self, **options):
         artists = Artist.objects.all()
         for artist in artists:
-            song = get_rand_track_for_artist(artist)
-            try:
-                if Song.objects.filter(name=song[0]).exists():
-                    pass
-                else:
-                    s = Song(name=song[0], url=song[1], artist_id=artist.id)
-                    s.save()
-            except Song.DoesNotExist:
-                raise CommandError('Song does not exist')
+            song_dic = get_rand_track_for_artist(artist)
+            if Song.objects.filter(name=song_dic['permalink']).exists():
+                pass
+            else:
+                s = Song(
+                    name=song_dic['permalink'],
+                    url=song_dic['permalink_url'],
+                    playback_count=song_dic['playback_count'],
+                    artist_id=artist.id
+                    )
+                s.save()
 
         self.stdout.write(self.style.SUCCESS('Successfully collected songs'))
