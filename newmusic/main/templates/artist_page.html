@@ -42,14 +42,16 @@
 <div class="row">
   <div class="col-xs-12 abtn">
     <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#song" aria-expanded="false" aria-controls="song"><span class="glyphicon glyphicon-music"></span></button>
+  {% if song %}
     <div class="collapse" id="song">
       <div class="card card-block">
-        <iframe src="https://w.soundcloud.com/player/?url={{ song_url }}&auto_play=false" width=500px scrolling="yes"></iframe><br>
-        {% if song_pb_count %}
-        <h4><strong>Playback Count:</strong> {{ song_pb_count }}</h4>
+        <iframe src="https://w.soundcloud.com/player/?url={{ song.url }}&auto_play=false" width=500px scrolling="yes"></iframe><br>
+        {% if song.playback_count %}
+        <h4><strong>Playback Count:</strong> {{ song.playback_count }}</h4>
         {% endif %}
       </div>
     </div>
+  {% endif %}
   </div>
   <div class="col-xs-12 col-md-12 abtn">
     <iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url={{ artist.url }}&color=orange_white&size=32" style="width: 32px; height: 32px;"></iframe>
