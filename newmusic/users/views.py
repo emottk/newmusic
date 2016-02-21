@@ -39,7 +39,6 @@ def user_root(request, username):
 
 @psa('social:complete')
 def register_by_access_token(request, backend):
-    print(request.GET)
     code = request.GET.get('code')
     resource = client.exchange_token(code)
     user = request.backend.do_auth(resource.access_token)

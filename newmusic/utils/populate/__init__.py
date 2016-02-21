@@ -2,12 +2,11 @@ from newmusic.utils.soundcloud import get_artists, get_rand_track_for_artist
 from newmusic.main.models import Artist, Song
 
 def collect_artists():
+    """Calls on soundcloud API to populate database with artists"""
     artists = get_artists()
     for artist in artists:
-        if Artist.objects.filter(name=artist['permalink']).exists():
-            pass
-        else:
-            a = Artist(
+        if not Artist.objects.filter(name=artist['permalink']).exists():
+            Artist.objects.create(
                 name=artist['permalink'],
                 sc_id=artist['id'],
                 url=artist['permalink_url'],
@@ -18,19 +17,16 @@ def collect_artists():
                 description=artist['description'],
                 followers_count=artist['followers_count']
                 )
-            a.save()
 
 def collect_songs():
+    """Calls on soundcloud API to populate database with songs based on collected artists"""
     artists = Artist.objects.all()
     for artist in artists:
         song_dic = get_rand_track_for_artist(artist)
-        if Song.objects.filter(name=song_dic['permalink']).exists():
-            pass
-        else:
-            s = Song(
+        if not Song.objects.filter(artist_id=song_dic['artist_id']).exists():
+            Song.objects.create(
                 name=song_dic['permalink'],
                 url=song_dic['permalink_url'],
                 playback_count=song_dic['playback_count'],
-                artist_id=artist.id
+                artist_id=song_dic['artist_id']
                 )
-            s.save()

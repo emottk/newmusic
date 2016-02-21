@@ -15,6 +15,10 @@ client = soundcloud.Client(
 
 
 def get_artists():
+    """
+    Returns artists_list from Soundcloud API
+
+    """
     page_size = 100
     artists_list = []
     url = '/users'
@@ -50,18 +54,23 @@ def get_artists():
     return artists_list
 
 def get_rand_track_for_artist(artist_obj):
+    """Returns random track from artist object"""
     response = client.get('users/{}/tracks'.format(artist_obj.sc_id))
     track = random.choice(response)
+    artist_id = artist_obj.id
     permalink = track.obj['permalink']
     permalink_url = track.obj['permalink_url']
     playback_count = track.obj['playback_count']
     return ({
         'permalink':permalink,
         'permalink_url':permalink_url,
-        'playback_count':playback_count
+        'playback_count':playback_count,
+        'artist_id':artist_id
         })
 
 def get_user_avatar(user):
+    """Returns user avatar"""
+
     try:
         sc = user.social_auth.get(provider='soundcloud')
     except ObjectDoesNotExist:
@@ -69,6 +78,8 @@ def get_user_avatar(user):
     return sc.extra_data.get('avatar_url')
 
 def get_user_permalink(user):
+    """Returns user permalink"""
+
     try:
         sc = user.social_auth.get(provider='soundcloud')
     except ObjectDoesNotExist:

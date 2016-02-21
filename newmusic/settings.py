@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -52,7 +50,6 @@ MIDDLEWARE_CLASSES = [
 ]
 AUTHENTICATION_BACKENDS = (
     'newmusic.utils.backends.SoundcloudOAuth2',
-
     'django.contrib.auth.backends.ModelBackend',
 )
 
