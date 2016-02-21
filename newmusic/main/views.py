@@ -1,6 +1,6 @@
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import View
@@ -13,14 +13,16 @@ from newmusic.utils.opinions import get_unique_artist
 
 @method_decorator(login_required, name='dispatch')
 class ArtistIndex(View):
-    template_name = "main/explore.html"
+    template_name = "explore.html"
 
     def get(self, request):
         artist = get_unique_artist(request.user)
         if artist is None:
-            return render(request, "main/no_artist.html")
+            return render(request, "no_artist.html")
         user = request.user
         song = artist.song_set.first()
+        if song is None:
+            return HttpResponse("No Song")
         song_url = song.url
         song_pb_count = song.playback_count
         like_form = OpinionForm({'artist': artist.id, 'opinion': True})
@@ -35,6 +37,9 @@ class ArtistIndex(View):
         })
 
     def post(self, request):
+
+        """Saves user opinion on artist"""
+
         form = OpinionForm(request.POST)
         if form.is_valid():
             opinion = form.save(commit=False)
@@ -42,13 +47,15 @@ class ArtistIndex(View):
             opinion.save()
         else:
             print(form.errors)
-            return HttpResponse("Form is invalid")
+            return HttpResponseBadRequest("Form is invalid")
         return redirect('explore')
 
 
 @method_decorator(login_required, name='dispatch')
 class OpinionDelete(View):
-
+    """
+    Deletes user opinion on artist
+    """
     def post(self, request, pk):
         opinion = get_object_or_404(request.user.opinion_set, pk=pk)
         opinion.delete()
@@ -58,16 +65,15 @@ class OpinionDelete(View):
 
 
 class AboutIndex(View):
-    template_name = "main/about.html"
+    template_name = "about.html"
 
     def get(self, request):
         return render(request, self.template_name)
 
 
 class ArtistPage(View):
-    template_name = "main/artist_page.html"
+    template_name = "artist_page.html"
     def get(self, request, artist):
         artist_object = get_object_or_404(Artist, name=artist)
-        song_url = artist_object.song_set.first().url
-        song_pb_count = artist_object.song_set.first().playback_count
-        return render(request, self.template_name, {'artist': artist_object, 'song_url': song_url, 'song_pb_count': song_pb_count})
+        song = artist_object.song_set.first()
+        return render(request, self.template_name, {'artist': artist_object, 'song': song})
