@@ -4,7 +4,7 @@ from django import forms
 from newmusic.main.models import Opinion
 
 class OpinionForm(ModelForm):
-    opinion = forms.BooleanField(widget=forms.HiddenInput())
+    opinion = forms.BooleanField(required=False, widget=forms.HiddenInput())
 
     class Meta:
         model = Opinion
