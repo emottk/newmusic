@@ -70,3 +70,7 @@ body {
   left: 400px;
   text-align: justify;
 }
+
+strong {
+  color: #a6a6a6;
+}
