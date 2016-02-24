@@ -125,8 +125,10 @@ WSGI_APPLICATION = 'newmusic.wsgi.application'
 
 
 STATICFILES_DIRS = (
-    "/Users/emilykowal/workspace/newmusic/newmusic/static",
+    os.path.join(BASE_DIR, "static"),
 )
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -176,3 +178,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+from .secret import *
