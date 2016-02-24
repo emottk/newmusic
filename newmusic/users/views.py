@@ -1,21 +1,13 @@
-import soundcloud
-
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from social.apps.django_app.utils import psa
 from django.shortcuts import render, redirect
-from django.conf import settings
-from newmusic.utils.soundcloud import get_user_avatar, get_user_permalink
-from newmusic.utils.opinions import sort_true, sort_false
+from social.apps.django_app.utils import psa
 
-# create client object with app credentials
-client = soundcloud.Client(
-    client_id=settings.SOCIAL_AUTH_SOUNDCLOUD_KEY,
-    client_secret=settings.SOCIAL_AUTH_SOUNCLOUD_SECRET,
-    redirect_uri='http://localhost:8000/users/register-by-token/soundcloud')
+from newmusic.utils.soundcloud import client, get_user_avatar, get_user_permalink
+from newmusic.utils.opinions import sort_true, sort_false
 
 
 @login_required

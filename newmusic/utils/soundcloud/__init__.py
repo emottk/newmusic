@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 client = soundcloud.Client(
     client_id=settings.SOCIAL_AUTH_SOUNDCLOUD_KEY,
     client_secret=settings.SOCIAL_AUTH_SOUNCLOUD_SECRET,
-    redirect_uri='http://localhost:8000/users/register-by-token/soundcloud')
+    redirect_uri='http://localhost:5000/users/register-by-token/soundcloud')
 
 
 def get_artists():

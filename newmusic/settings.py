@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+SECRET_KEY = 'a0hhtemo050d$5q+l!ngv&efz$p857)j6-8n!^sb6%am13=@92'
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -52,6 +55,11 @@ AUTHENTICATION_BACKENDS = (
     'newmusic.utils.backends.SoundcloudOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+SOCIAL_AUTH_SOUNDCLOUD_KEY = '2e1d10db84c6a2913e1a812d33966f90'
+SOCIAL_AUTH_SOUNCLOUD_SECRET = '79b17989850f803dae476ac3ec1518ce'
+
+
 
 OAUTH2_PROVIDER = {
     'SCOPES': {'read': 'Read scope', 'write': 'Write Scope'}
@@ -178,5 +186,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-
-from .secret import *
