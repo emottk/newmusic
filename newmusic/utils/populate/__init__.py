@@ -14,7 +14,7 @@ def collect_artists():
                 country=artist['country'],
                 city=artist['city'],
                 website=artist['website'],
-                description=artist['description'],
+                description=artist['description'][:Artist._meta.get_field('description').max_length],
                 followers_count=artist['followers_count']
                 )
 
