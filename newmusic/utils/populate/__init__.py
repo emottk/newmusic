@@ -6,7 +6,9 @@ def collect_artists():
     artists = get_artists()
     for artist in artists:
         if not Artist.objects.filter(name=artist['permalink']).exists():
-            artist['description'] = artist['description'][:Artist._meta.get_field('description').max_length] if artist.get('description') else ''
+            if artist.get('description'):
+                #truncate description to description max length
+                artist['description'] = artist['description'][:Artist._meta.get_field('description').max_length]
             Artist.objects.create(
                 name=artist['permalink'],
                 sc_id=artist['id'],

@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 # create client object with app credentials
 client = soundcloud.Client(
     client_id=settings.SOCIAL_AUTH_SOUNDCLOUD_KEY,
-    client_secret=settings.SOCIAL_AUTH_SOUNCLOUD_SECRET,
+    client_secret=settings.SOCIAL_AUTH_SOUNDCLOUD_SECRET,
     redirect_uri=settings.SOUNDCLOUD_REDIRECT_URI)
 
 
