@@ -104,7 +104,7 @@ ROOT_URLCONF = 'newmusic.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,8 +125,10 @@ WSGI_APPLICATION = 'newmusic.wsgi.application'
 
 
 STATICFILES_DIRS = (
-    "/Users/emilykowal/workspace/newmusic/newmusic/static",
+    os.path.join(BASE_DIR, "static"),
 )
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
