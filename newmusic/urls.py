@@ -17,8 +17,8 @@ Including another URLconf
 from django.conf.urls import include, url, patterns
 
 urlpatterns = patterns('',
-    url('', include('main.urls')),
+    url('', include('newmusic.main.urls')),
     url('^', include('django.contrib.auth.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^users/', include('users.urls')),
+    url(r'^users/', include('newmusic.users.urls')),
 )

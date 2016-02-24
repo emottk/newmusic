@@ -1,6 +1,6 @@
 from django.conf.urls import url, patterns
 
-from main import views
+from newmusic.main import views
 
 
 urlpatterns = patterns('',
