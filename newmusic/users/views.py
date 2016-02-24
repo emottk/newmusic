@@ -6,9 +6,8 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from social.apps.django_app.utils import psa
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.conf import settings
-from newmusic.main.models import Opinion
 from newmusic.utils.soundcloud import get_user_avatar, get_user_permalink
 from newmusic.utils.opinions import sort_true, sort_false
 

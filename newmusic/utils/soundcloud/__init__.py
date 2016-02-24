@@ -1,6 +1,6 @@
 import random
-import soundcloud
 import logging
+import soundcloud
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -70,7 +70,6 @@ def get_rand_track_for_artist(artist_obj):
 
 def get_user_avatar(user):
     """Returns user avatar"""
-
     try:
         sc = user.social_auth.get(provider='soundcloud')
     except ObjectDoesNotExist:
@@ -79,7 +78,6 @@ def get_user_avatar(user):
 
 def get_user_permalink(user):
     """Returns user permalink"""
-
     try:
         sc = user.social_auth.get(provider='soundcloud')
     except ObjectDoesNotExist:
