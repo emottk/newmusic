@@ -58,8 +58,7 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_SOUNDCLOUD_KEY = '2e1d10db84c6a2913e1a812d33966f90'
 SOCIAL_AUTH_SOUNCLOUD_SECRET = '79b17989850f803dae476ac3ec1518ce'
-
-
+SOUNDCLOUD_REDIRECT_URI = "https://mighty-everglades-78445.herokuapp.com/users/register-by-token/soundcloud"
 
 OAUTH2_PROVIDER = {
     'SCOPES': {'read': 'Read scope', 'write': 'Write Scope'}
