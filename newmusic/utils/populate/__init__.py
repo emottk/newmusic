@@ -26,10 +26,20 @@ def collect_songs():
     artists = Artist.objects.all()
     for artist in artists:
         song_dic = get_rand_track_for_artist(artist)
-        if not Song.objects.filter(artist_id=song_dic['artist_id']).exists():
+        if not Song.objects.filter(artist_id=song_dic['artist_id']).exists() or None:
             Song.objects.create(
                 name=song_dic['permalink'],
                 url=song_dic['permalink_url'],
                 playback_count=song_dic['playback_count'],
                 artist_id=song_dic['artist_id']
                 )
+    # artists = Artist.objects.all()
+    # for artist in artists:
+    #     song_dic = get_rand_track_for_artist(artist)
+    #     if not artist.song_set.first().exists() or None:
+    #         Song.objects.create(
+    #             name=song_dic['permalink'],
+    #             url=song_dic['permalink_url'],
+    #             playback_count=song_dic['playback_count'],
+    #             artist_id=song_dic['artist_id']
+    #             )
