@@ -99,10 +99,27 @@ class PopulateTests(TestCase):
         """
         with patch(
             'newmusic.utils.populate.get_rand_track_for_artist',
-            return_value=None
+            return_value={}
         ):
             collect_songs([{}])
             self.assertEqual(Song.objects.count(), 0)
+
+    def test_already_saved_song(self):
+        """
+        tests that we don't save a song that is already in db
+        """
+        Song.objects.create(name='example', url='exmaple.org', playback_count=33, artist_id=1)
+        with patch(
+            'newmusic.utils.populate.get_rand_track_for_artist',
+            return_value= ({
+                'permalink':'example',
+                'permalink_url': 'example.org',
+                'playback_count': 33,
+                'artist_id': 1
+                })
+        ):
+            collect_songs([{}])
+            self.assertEqual(Song.objects.count(), 1)
 
 class FormTests(TestCase):
 
