@@ -1,4 +1,4 @@
-# New Music
+#New Music
 
 This app uses the Soundcloud API to bring upcoming artists to the user. It displays artists with low follower counts along with a song to sample. A user can like an artist to view their profile later.
 
