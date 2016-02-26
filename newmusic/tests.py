@@ -58,12 +58,12 @@ class HomeViewTests(TestCase):
         self.user = User.objects.create_user(username='testusername', password='testing')
 
     def test_home_anonymous(self):
-        response = self.client.get('/home/')
+        response = self.client.get('')
         self.assertEqual(response.status_code, 302)
 
     def test_home_authed(self):
         self.client.force_login(self.user)
-        response = self.client.get('/home/')
+        response = self.client.get('')
         self.assertEqual(response.status_code, 200)
 
     def test_view_with_no_artists(self):
@@ -94,19 +94,15 @@ class HomeViewTests(TestCase):
 class PopulateTests(TestCase):
 
     def test_no_song(self):
+        """
+        tests that we don't save songs that have a value of None
+        """
         with patch(
-            'newmusic.utils.soundcloud.get_rand_track_for_artist',
+            'newmusic.utils.populate.get_rand_track_for_artist',
             return_value=None
-            ) as mock:
-            # artist1 = Mock(spec=Artist)
-            # artist1.id = 1
-            # artist1.name = 'example'
-            # artist1.sc_id = 0
+        ):
             collect_songs([{}])
-            saved_songs = bool(Song.objects.all())
-            import ipdb; ipdb.set_trace()
-            self.assertFalse(saved_songs)
-
+            self.assertEqual(Song.objects.count(), 0)
 
 class FormTests(TestCase):
 

@@ -27,8 +27,8 @@ def collect_songs(artists=None):
     for artist in artists:
         song_dict = get_rand_track_for_artist(artist)
         if  (
-            not Song.objects.filter(artist_id=song_dict['artist_id']).exists() and
-            song_dict
+            song_dict and
+            not Song.objects.filter(artist_id=song_dict['artist_id']).exists()
         ):
             Song.objects.create(
                 name=song_dict['permalink'],
