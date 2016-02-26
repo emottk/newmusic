@@ -70,6 +70,8 @@ These things should be handled within your cloned version of the app.
 
 For any trouble or questions, click [here](https://devcenter.heroku.com/articles/getting-started-with-python#introduction) to learn more about Heroku and Python.
 
+
+###Using Heroku via Command Line
 ```bash
 
 # Check your logs
