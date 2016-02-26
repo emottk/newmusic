@@ -48,7 +48,7 @@ You should now have a dev instance running at https://localhost:8000
 
 ## Deploying
 
-Create a free Heroku account [here](https://signup.heroku.com/dc)
+First create a free Heroku account [here](https://signup.heroku.com/dc) if you don't have one.
 
 Download the Heroku Toolbelt [here](https://devcenter.heroku.com/articles/getting-started-with-python#set-up).
 
