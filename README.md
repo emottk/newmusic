@@ -20,10 +20,7 @@ export WORKON_HOME=~/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 mkvirtualenv django
 ```
-If you have not yet downloaded django, do so into your environment:
-```
-pip install django
-```
+This app uses Django 1.9.2 and Python 3.5.1. Make sure you specify these in your environment.
 
 ###Installing newmusic
 
