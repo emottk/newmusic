@@ -48,9 +48,13 @@ You should now have a dev instance running at https://localhost:8000
 
 ## Deploying
 
-First create a free Heroku account [here](https://signup.heroku.com/dc) if you don't have one.
+NewMusic currently lives at https://mighty-everglades-78445.herokuapp.com/
 
-Download the Heroku Toolbelt [here](https://devcenter.heroku.com/articles/getting-started-with-python#set-up).
+To deploy your own version on Heroku:
+
+First create a [free Heroku account](https://signup.heroku.com/dc) if you don't have one.
+
+Download the [Heroku Toolbelt](https://devcenter.heroku.com/articles/getting-started-with-python#set-up).
 
 ```bash
 
@@ -68,7 +72,7 @@ A Procfile and requirements.txt are necessary for deployment.
 Heroku uses postgresql as its database as well.
 These things should be handled within your cloned version of the app.
 
-For any trouble or questions, click [here](https://devcenter.heroku.com/articles/getting-started-with-python#introduction) to learn more about Heroku and Python.
+[Learn more](https://devcenter.heroku.com/articles/getting-started-with-python#introduction) about Heroku and Python.
 
 
 ###Using Heroku via Command Line
