@@ -48,4 +48,21 @@ You should now have a dev instance running at https://localhost:8000
 
 ## Deploying
 
-Fill me out please!
+Create a free Heroku account [here](https://signup.heroku.com/dc)
+
+Download the Heroku Toolbelt [here](https://devcenter.heroku.com/articles/getting-started-with-python#set-up).
+
+```bash
+
+# User your credentials to log in to Heroku from terminal
+heroku login
+
+# After successfully logging in, create your new Heroku project from the newmusic directory
+heroku create
+
+# Deploy the code through git
+git push heroku master
+
+```
+
+Read more about Heroku and Python [here](https://devcenter.heroku.com/articles/getting-started-with-python#introduction)
