@@ -69,3 +69,22 @@ Heroku uses postgresql as its database as well.
 These things should be handled within your cloned version of the app.
 
 For any trouble or questions, click [here](https://devcenter.heroku.com/articles/getting-started-with-python#introduction) to learn more about Heroku and Python.
+
+```bash
+
+# Check your logs
+heroku logs
+
+# Or
+heroku logs --tail
+
+# To run app locally
+heroku local web
+
+# To migrate
+heroku run python manage.py migrate
+
+# To open a shell through heroku
+heroku run python manage.py shell
+
+```
