@@ -48,7 +48,7 @@ You should now have a dev instance running at https://localhost:8000
 
 ## Deploying
 
-NewMusic currently lives at https://mighty-everglades-78445.herokuapp.com/
+newmusic currently lives at https://mighty-everglades-78445.herokuapp.com/
 
 To deploy your own version on Heroku:
 
