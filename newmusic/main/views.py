@@ -16,6 +16,10 @@ class ArtistIndex(View):
     template_name = "explore.html"
 
     def get(self, request):
+        """
+        pulls unique artist from database, sends artist along with song
+        and all important information about both to template
+        """
         artist = get_unique_artist(request.user)
         if artist is None:
             return render(request, "no_artist.html")
@@ -37,9 +41,10 @@ class ArtistIndex(View):
         })
 
     def post(self, request):
+        """
+        Saves user opinion on artist with hidden form
 
-        """Saves user opinion on artist"""
-
+        """
         form = OpinionForm(request.POST)
         if form.is_valid():
             opinion = form.save(commit=False)
@@ -53,10 +58,11 @@ class ArtistIndex(View):
 
 @method_decorator(login_required, name='dispatch')
 class OpinionDelete(View):
-    """
-    Deletes user opinion on artist
-    """
     def post(self, request, pk):
+        """
+        Deletes user opinion on artist with hidden form
+
+        """
         opinion = get_object_or_404(request.user.opinion_set, pk=pk)
         opinion.delete()
         if request.is_ajax():
@@ -68,12 +74,20 @@ class AboutIndex(View):
     template_name = "about.html"
 
     def get(self, request):
+        """
+        View for basic about page
+
+        """
         return render(request, self.template_name)
 
 
 class ArtistPage(View):
     template_name = "artist_page.html"
     def get(self, request, artist):
+        """
+        Pulls info from artist in database to populate specific artist page,
+        as well as song info tied to that artist
+        """
         artist_object = get_object_or_404(Artist, name=artist)
         song = artist_object.song_set.first()
         return render(request, self.template_name, {'artist': artist_object, 'song': song})

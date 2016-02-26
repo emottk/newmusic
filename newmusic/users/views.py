@@ -12,6 +12,12 @@ from newmusic.utils.opinions import sort_true, sort_false
 
 @login_required
 def user_root(request, username):
+    """
+    view for user profile, pulls liked songs from database to populate
+    template, as well as a few other pieces of data about user from
+    soundcloud profile
+
+    """
     if request.user.username == username:
         true_list = sort_true(request.user)
         false_list = sort_false(request.user)
@@ -30,6 +36,10 @@ def user_root(request, username):
 
 @psa('social:complete')
 def register_by_access_token(request, backend):
+    """
+    registers user through soundcloud social_auth
+
+    """
     code = request.GET.get('code')
     resource = client.exchange_token(code)
     user = request.backend.do_auth(resource.access_token)
@@ -44,11 +54,19 @@ def register_by_access_token(request, backend):
 
 
 def login_redirect(request):
+    """
+    redirects to login page w/ soundcloud
+
+    """
     if "next" in request.GET:
         request.session["next"] = request.GET.get("next")
     return render(request, 'register.html', {"soundcloud_redirect" : client.authorize_url()})
 
 def logout_view(request):
+    """
+    sends successful logout message to about page
+    
+    """
     logout(request)
     messages.success(request, "You have successfully logged out!")
     return redirect(reverse('about'))
