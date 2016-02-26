@@ -64,5 +64,8 @@ heroku create
 git push heroku master
 
 ```
+A Procfile and requirements.txt are necessary for deployment.
+Heroku uses postgresql as its database as well.
+These things should be handled within your cloned version of the app.
 
-Read more about Heroku and Python [here](https://devcenter.heroku.com/articles/getting-started-with-python#introduction)
+For any trouble or questions, click [here](https://devcenter.heroku.com/articles/getting-started-with-python#introduction) to learn more about Heroku and Python.
