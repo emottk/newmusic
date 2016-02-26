@@ -1,3 +1,4 @@
+from mock import Mock, patch
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
@@ -51,11 +52,6 @@ class UserViewTests(TestCase):
         response = self.client.get(url)
         self.assertContains(response, "not an active user!")
 
-    # def test_user_page_avatar(self):
-    #     self.client.force_login(self.user)
-    #     url = reverse('user_page', args=[self.user.username])
-    #     response = self.client.get(url)
-    #     self.assertTrue(response.context['avatar_url'])
 
 class HomeViewTests(TestCase):
     def setUp(self):
@@ -93,6 +89,23 @@ class HomeViewTests(TestCase):
         self.client.force_login(self.user)
         response = self.client.post(reverse('explore'), {'artist': artist.id})
         self.assertEqual(response.status_code, 400)
+
+
+class PopulateTests(TestCase):
+
+    def test_no_song(self):
+        with patch(
+            'newmusic.utils.soundcloud.get_rand_track_for_artist',
+            return_value=None
+            ) as mock:
+            # artist1 = Mock(spec=Artist)
+            # artist1.id = 1
+            # artist1.name = 'example'
+            # artist1.sc_id = 0
+            collect_songs([{}])
+            saved_songs = bool(Song.objects.all())
+            import ipdb; ipdb.set_trace()
+            self.assertFalse(saved_songs)
 
 
 class FormTests(TestCase):

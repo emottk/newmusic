@@ -55,6 +55,7 @@ def get_artists():
 
 def get_rand_track_for_artist(artist_obj):
     """Returns random track from artist object"""
+    print('getting rand track')
     response = client.get('users/{}/tracks'.format(artist_obj.sc_id))
     track = random.choice(response)
     artist_id = artist_obj.id

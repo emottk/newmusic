@@ -21,25 +21,18 @@ def collect_artists():
                 followers_count=artist['followers_count']
                 )
 
-def collect_songs():
+def collect_songs(artists=None):
     """Calls on soundcloud API to populate database with songs based on collected artists"""
-    artists = Artist.objects.all()
+    artists = artists if artists else Artist.objects.all()
     for artist in artists:
-        song_dic = get_rand_track_for_artist(artist)
-        if not Song.objects.filter(artist_id=song_dic['artist_id']).exists() or None:
+        song_dict = get_rand_track_for_artist(artist)
+        if  (
+            not Song.objects.filter(artist_id=song_dict['artist_id']).exists() and
+            song_dict
+        ):
             Song.objects.create(
-                name=song_dic['permalink'],
-                url=song_dic['permalink_url'],
-                playback_count=song_dic['playback_count'],
-                artist_id=song_dic['artist_id']
+                name=song_dict['permalink'],
+                url=song_dict['permalink_url'],
+                playback_count=song_dict['playback_count'],
+                artist_id=song_dict['artist_id']
                 )
-    # artists = Artist.objects.all()
-    # for artist in artists:
-    #     song_dic = get_rand_track_for_artist(artist)
-    #     if not artist.song_set.first().exists() or None:
-    #         Song.objects.create(
-    #             name=song_dic['permalink'],
-    #             url=song_dic['permalink_url'],
-    #             playback_count=song_dic['playback_count'],
-    #             artist_id=song_dic['artist_id']
-    #             )
