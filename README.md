@@ -6,7 +6,7 @@ This app uses the Soundcloud API to bring upcoming artists to the user. It displ
 
 ### System requirements
 
-Newmusic requires [python3][https://www.python.org/download/releases/3.0/], [pip][https://pypi.python.org/pypi/pip], [virtualenvwrapper][https://virtualenvwrapper.readthedocs.org/en/latest/] and [postgresql][http://www.postgresql.org/].
+Newmusic requires [python3](https://www.python.org/download/releases/3.0/), [pip](https://pypi.python.org/pypi/pip), [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/) and [postgresql](http://www.postgresql.org/).
 
 
 To install system dependencies on OS X using [Homebrew](http://brew.sh/):
